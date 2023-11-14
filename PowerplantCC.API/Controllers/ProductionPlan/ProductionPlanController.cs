@@ -9,6 +9,7 @@ namespace PowerplantCC.API.Controllers.ProductionPlan
         [HttpPost(Name = ProductionPlanRoutes.ProductionPlan)]
         public IActionResult CalculateProductionPlanAsync(ProductionPlanPayloadDto productionPlanPayload)
         {
+
             return Ok(productionPlanPayload);
         }
     }
