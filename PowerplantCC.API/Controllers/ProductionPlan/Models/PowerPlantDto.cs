@@ -1,14 +1,15 @@
-﻿using PowerplantCC.Domain.Enums;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using PowerplantCC.Domain.Enums;
 
 namespace PowerplantCC.API.Controllers.ProductionPlan
 {
     public partial class ProductionPlanController
     {
-        public record PowerPlantDto(
+        public record PowerplantDto(
             string Name,
-            [property: JsonConverter(typeof(JsonStringEnumConverter))]
-            PowerplantType PowerplantType,
+            [JsonConverter(typeof(StringEnumConverter))]
+            PowerplantType? Type,
             double Efficiency,
             double PMin,
             double PMax);

@@ -9,7 +9,7 @@ namespace PowerplantCC.API.Controllers.ProductionPlan
             [JsonPropertyName("gas(euro/MWh)")]
             public double GasEuroMWh { get; set; }
 
-            [JsonPropertyName("kerosine(euro / MWh)")]
+            [JsonPropertyName("kerosine(euro/MWh)")]
             public double KerosineEuroMWh { get; set; }
 
             [JsonPropertyName("co2(euro/ton)")]

@@ -2,6 +2,6 @@
 {
     public partial class ProductionPlanController
     {
-        public record ProductionPlanPayloadDto(double Load, FuelsDto Fuels, PowerPlantDto[] PowerPlants);
+        public record ProductionPlanPayloadDto(double Load, FuelsDto Fuels, PowerplantDto[] PowerPlants);
     }
 }
