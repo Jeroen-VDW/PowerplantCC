@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerplantCC.API", "PowerplantCC.API.csproj", "{50D8E103-536A-4889-915E-0E4B8DE3D490}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerplantCC.Domain", "..\PowerplantCC.Domain\PowerplantCC.Domain.csproj", "{1D273D6D-F4D7-4B21-933A-8A25A1049CAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{50D8E103-536A-4889-915E-0E4B8DE3D490}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50D8E103-536A-4889-915E-0E4B8DE3D490}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50D8E103-536A-4889-915E-0E4B8DE3D490}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D273D6D-F4D7-4B21-933A-8A25A1049CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D273D6D-F4D7-4B21-933A-8A25A1049CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D273D6D-F4D7-4B21-933A-8A25A1049CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D273D6D-F4D7-4B21-933A-8A25A1049CAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
