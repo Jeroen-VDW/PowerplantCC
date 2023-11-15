@@ -1,9 +1,8 @@
-﻿namespace PowerplantCC.Domain.Enums
+﻿namespace PowerplantCC.Domain.Enums;
+
+public enum PowerplantType
 {
-    public enum PowerplantType
-    {
-        GasFired,
-        TurboJet,
-        WindTurbine
-    }
+    GasFired,
+    TurboJet,
+    WindTurbine
 }

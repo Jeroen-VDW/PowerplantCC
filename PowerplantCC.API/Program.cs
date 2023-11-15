@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using PowerplantCC.API.Services;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IPowerPlantLoadBalancerService, PowerPlantLoadBalancerService>();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

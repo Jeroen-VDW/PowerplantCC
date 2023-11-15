@@ -1,7 +1,3 @@
-﻿namespace PowerplantCC.API.Controllers.ProductionPlan
-{
-    public partial class ProductionPlanController
-    {
-        public record ProductionPlanResponseDto(PowerplantLoad[] PowerplantLoads);
-    }
-}
+﻿namespace PowerplantCC.API.Controllers.ProductionPlan.Models;
+
+public record ProductionPlanResponseDto(PowerplantLoad[] PowerplantLoads);
