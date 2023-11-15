@@ -126,6 +126,37 @@ namespace PowerplantCC.API.Test.Services
                 },
                 null
             };
+            yield return new object?[]
+            {
+                new ProductionPlanPayloadDto(
+                    9100,
+                    new FuelsDto
+                    {
+                        GasEuroMWh = 13.4,
+                        KerosineEuroMWh = 50.8,
+                        CO2EuroTon = 20,
+                        WindPercentage = 60,
+                    },
+                    new PowerplantDto[]
+                    {
+                        new PowerplantDto("gasfiredbig1", PowerplantType.GasFired, .53, 100, 460),
+                        new PowerplantDto("gasfiredbig2", PowerplantType.GasFired, .53, 100, 460),
+                        new PowerplantDto("gasfiredsomewhatsmaller", PowerplantType.GasFired, .37, 40, 210),
+                        new PowerplantDto("tj1", PowerplantType.TurboJet, .3, 0, 16),
+                        new PowerplantDto("windpark1", PowerplantType.WindTurbine, 1, 0, 150),
+                        new PowerplantDto("windpark2", PowerplantType.WindTurbine, 1, 0, 36),
+                    }),
+                new List<PowerplantLoadDto>
+                {
+                    new PowerplantLoadDto("windpark1", 90),
+                    new PowerplantLoadDto("windpark2", 21.6),
+                    new PowerplantLoadDto("gasfiredbig1", 460),
+                    new PowerplantLoadDto("gasfiredbig2", 338.4),
+                    new PowerplantLoadDto("gasfiredsomewhatsmaller", 0),
+                    new PowerplantLoadDto("tj1", 0),
+                },
+                "Unable to meet load requirements with the given powerplants"
+            };
         }
     }
 }
