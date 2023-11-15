@@ -4,5 +4,5 @@ namespace PowerplantCC.API.Services;
 
 public interface IPowerPlantLoadBalancerService
 {
-    IEnumerable<PowerplantLoad> BalanceLoadConfiguration(ProductionPlanPayloadDto productionPlanPayload);
+    IEnumerable<PowerplantLoadDto> BalanceLoadConfiguration(ProductionPlanPayloadDto productionPlanPayload);
 }

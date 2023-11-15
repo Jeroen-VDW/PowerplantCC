@@ -4,15 +4,15 @@ namespace PowerplantCC.API.Services;
 
 public class PowerPlantLoadBalancerService : IPowerPlantLoadBalancerService
 {
-    public IEnumerable<PowerplantLoad> BalanceLoadConfiguration(ProductionPlanPayloadDto productionPlanPayload)
+    public IEnumerable<PowerplantLoadDto> BalanceLoadConfiguration(ProductionPlanPayloadDto productionPlanPayload)
     {
         var powerplants = productionPlanPayload.PowerPlants.OrderBy(p => CalculatePowerplantCost(p, productionPlanPayload.Fuels));
         var remainingLoad = productionPlanPayload.Load;
-        var powerplantLoads = new List<PowerplantLoad>();
+        var powerplantLoads = new List<PowerplantLoadDto>();
 
         foreach (var powerplant in powerplants)
         {
-            var powerplantLoad = new PowerplantLoad(powerplant.Name, CalculatePowerplantOutput(powerplant, productionPlanPayload.Fuels, remainingLoad));
+            var powerplantLoad = new PowerplantLoadDto(powerplant.Name, CalculatePowerplantOutput(powerplant, productionPlanPayload.Fuels, remainingLoad));
             powerplantLoads.Add(powerplantLoad);
             remainingLoad -= powerplantLoad.P;
         }
