@@ -9,7 +9,7 @@ namespace PowerplantCC.API.Controllers.ProductionPlan
         [HttpPost(Name = ProductionPlanRoutes.ProductionPlan)]
         public IActionResult CalculateProductionPlanAsync(ProductionPlanPayloadDto productionPlanPayload)
         {
-            var powerplants = OrderPowerplantsByCost(productionPlanPayload.PowerPlants, productionPlanPayload.Fuels);
+            var powerplants = productionPlanPayload.PowerPlants.OrderBy(p => CalculatePowerplantCost(p, productionPlanPayload.Fuels));
             var remainingLoad = productionPlanPayload.Load;
             var powerplantLoads = new List<PowerplantLoad>();
 
@@ -20,10 +20,29 @@ namespace PowerplantCC.API.Controllers.ProductionPlan
                 remainingLoad -= powerplantLoad.P;
             }
 
+            if (remainingLoad < 0)
+            {
+                powerplants = productionPlanPayload.PowerPlants.OrderByDescending(p => CalculatePowerplantCost(p, productionPlanPayload.Fuels));
+                foreach (var powerplant in powerplants)
+                {
+                    var powerplantLoad = powerplantLoads.Single(pl => pl.Name == powerplant.Name);
+                    if (powerplantLoad.P > 0)
+                    {
+                        var loadReduction = Math.Min(-remainingLoad, powerplantLoad.P - powerplant.PMin);
+                        powerplantLoad.P -= loadReduction;
+                        remainingLoad -= loadReduction;
+                    }
+                    if (remainingLoad == 0)
+                    {
+                        return Ok(powerplantLoads);
+                    }
+                }
+
+            }
+
             if (remainingLoad > 0)
             {
-
-                return BadRequest("Unable to meet load requirements with the give powerplants");
+                return BadRequest("Unable to meet load requirements with the given powerplants");
             }
 
             return Ok(powerplantLoads);
@@ -31,17 +50,17 @@ namespace PowerplantCC.API.Controllers.ProductionPlan
 
         private double CalculatePowerplantOutput(PowerplantDto powerplant, FuelsDto fuelsDto, double load)
         {
+            if (load <= 0)
+            {
+                return 0;
+            }
+
             return powerplant.Type switch
             {
-                Domain.Enums.PowerplantType.GasFired or Domain.Enums.PowerplantType.TurboJet => Math.Round(Math.Min(powerplant.PMax, load), 1),
+                Domain.Enums.PowerplantType.GasFired or Domain.Enums.PowerplantType.TurboJet => Math.Round(Math.Max(Math.Min(powerplant.PMax, load), powerplant.PMin), 1),
                 Domain.Enums.PowerplantType.WindTurbine => Math.Round(Math.Min(powerplant.PMax * (fuelsDto.WindPercentage / 100), load), 1),
                 _ => throw new NotImplementedException($"{powerplant.Type} not implemented"),
             };
-        }
-
-        private IEnumerable<PowerplantDto> OrderPowerplantsByCost(IEnumerable<PowerplantDto> powerplants, FuelsDto fuelsDto)
-        {
-            return powerplants.OrderBy(p => CalculatePowerplantCost(p, fuelsDto));
         }
 
         private double CalculatePowerplantCost(PowerplantDto powerplant, FuelsDto fuels)
