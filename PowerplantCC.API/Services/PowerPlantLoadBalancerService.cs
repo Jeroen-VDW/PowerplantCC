@@ -45,7 +45,7 @@ public class PowerPlantLoadBalancerService : IPowerPlantLoadBalancerService
         return powerplantLoads;
     }
 
-    private double CalculatePowerplantOutput(PowerplantDto powerplant, FuelsDto fuelsDto, double load)
+    private static double CalculatePowerplantOutput(PowerplantDto powerplant, FuelsDto fuelsDto, double load)
     {
         if (load <= 0)
         {
@@ -60,7 +60,7 @@ public class PowerPlantLoadBalancerService : IPowerPlantLoadBalancerService
         };
     }
 
-    private double CalculatePowerplantCost(PowerplantDto powerplant, FuelsDto fuels)
+    private static double CalculatePowerplantCost(PowerplantDto powerplant, FuelsDto fuels)
     {
         if (powerplant.Efficiency == 0)
         {

@@ -11,6 +11,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IPowerPlantLoadBalancerService, PowerPlantLoadBalancerService>();
+builder.Services.AddLogging();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
